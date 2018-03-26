@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
-from apps.login.models import Super_User
-from .models import Super_User
+from apps.login.models import User
+from .models import User
 
 
 # landing page

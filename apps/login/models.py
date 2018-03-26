@@ -1,11 +1,10 @@
-from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 import re, bcrypt
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
-class Super_User_Manager(models.Manager):
+class User_Manager(models.Manager):
 
 	##### REGISTRATION VALIDATION #####
 	def validate_registration(self, postData):
@@ -28,7 +27,7 @@ class Super_User_Manager(models.Manager):
 			result['errors']['email'] = 'Email cannot be blank'
 		if not EMAIL_REGEX.match(postData['email']):
 			result['errors']['email'] = 'Invalid Email Address'
-		existing = Super_User.objects.filter(email = postData['email'])
+		existing = User.objects.filter(email = postData['email'])
 		if existing:
 			result['errors']['email'] = 'Email already registered, please log in instead.'
 
@@ -44,7 +43,7 @@ class Super_User_Manager(models.Manager):
 		# create new super_user
 			user_password = postData['password'] 
 			hashed = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt())
-			new_super_user = Super_User.objects.create(
+			new_user = User.objects.create(
 				first_name = postData['first_name'],
 				last_name = postData['last_name'],
 				alias = postData['alias'],
@@ -52,7 +51,7 @@ class Super_User_Manager(models.Manager):
 				password = hashed,
 				)
 			result['status'] = True
-			result['super_user_id'] = new_super_user.id
+			result['user_id'] = user.id
 			return result
 
 	##### LOGIN VALIDATION #####
@@ -63,7 +62,7 @@ class Super_User_Manager(models.Manager):
 		}
 
 		# email validation
-		existing = Super_User.objects.filter(email = postData['email'])
+		existing = User.objects.filter(email = postData['email'])
 		if existing:
 			user_password = postData['password'].encode()
 			# this is magic....
@@ -78,11 +77,11 @@ class Super_User_Manager(models.Manager):
 			return result
 		else:
 			result['status'] = True
-			result['super_user_id'] = existing[0].id
+			result['user_id'] = existing[0].id
 			return result
 
 # define super_user
-class Super_User(models.Model):
+class User(models.Model):
 	first_name = models.CharField(max_length=255)
 	last_name = models.CharField(max_length=255)
 	alias = models.CharField(max_length=255)
@@ -92,7 +91,7 @@ class Super_User(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	objects = Super_User_Manager()
+	objects = User_Manager()
 
 
 
