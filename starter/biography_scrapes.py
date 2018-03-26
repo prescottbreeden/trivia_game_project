@@ -32,8 +32,27 @@ for page in all_urls:
 		person_soup = BeautifulSoup(person_res.text, 'html.parser')
 		person_name = person_soup.find('dd').get_text()
 		person_abstract = person_soup.find(class_='l-person--abstract').get_text()
+		category = url.split('/')[-1:][0]
+		if category == 'football-players':
+			category = 1
+		if category == 'athletes-soccer-players':
+			category = 2
+		if category == 'athletes-baseball-players':
+			category = 3
+		if category == 'athletes-basketball-players':
+			category = 4
+		if category == 'athletes-hockey-players':
+			category = 5
+		if category == 'athletes-boxers':
+			category = 6
+		if category == 'athletes-golfers':
+			category = 7
+		if category == 'athletes-martial-arts-experts':
+			category = 8
+		if category == 'athletes-tennis-players':
+			category = 9
 		all_athletes.append({
-			'category': url.split('/')[-1:][0],
+			'category': category,
 			'name': person_name,
 			'abstract': person_abstract
 			})

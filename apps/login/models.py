@@ -16,8 +16,10 @@ class Super_User_Manager(models.Manager):
 		}
 
 		# name field validation
-		if postData['name'] == '':
-			result['errors']['name'] = 'Name cannot be blank'
+		if postData['first_name'] == '':
+			result['errors']['first_name'] = 'First name cannot be blank'
+		if postData['last_name'] == '':
+			result['errors']['last_name'] = 'First name cannot be blank'
 		if postData['alias'] == '':
 			result['errors']['alias'] = 'Last name cannot be blank'
 
@@ -47,7 +49,6 @@ class Super_User_Manager(models.Manager):
 				alias = postData['alias'],
 				email = postData['email'],
 				password = hashed,
-				birthday = postData['birthday'],
 				)
 			result['status'] = True
 			result['super_user_id'] = new_super_user.id
@@ -63,8 +64,6 @@ class Super_User_Manager(models.Manager):
 		# email validation
 		existing = Super_User.objects.filter(email = postData['email'])
 		if existing:
-			# password validation
-			# .encode().decode().encode()
 			user_password = postData['password'].encode()
 			# this is magic....
 			existing_password = existing[0].password[2: len(existing[0].password) - 1]
@@ -83,11 +82,12 @@ class Super_User_Manager(models.Manager):
 
 # define super_user
 class Super_User(models.Model):
-	name = models.CharField(max_length=255)
+	first_name = models.CharField(max_length=255)
+	last_name = models.CharField(max_length=255)
 	alias = models.CharField(max_length=255)
 	email = models.CharField(max_length=255)
 	password = models.CharField(max_length=255)
-	birthday = models.DateField()
+
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
