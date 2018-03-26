@@ -14,6 +14,7 @@ all_urls = [
 	{'url': 'people/groups/athletes-boxers'},
 	{'url': 'people/groups/athletes-golfers'},
 	{'url': 'people/groups/athletes-martial-arts-experts'},
+	{'url': 'people/groups/athletes-tennis-players'},
 ]
 base_url = 'https://www.biography.com/'
 for page in all_urls:
@@ -37,7 +38,7 @@ for page in all_urls:
 			'abstract': person_abstract
 			})
 		sleep(3)
-	with open("soccer.csv", "w") as file:
+	with open("athletes.csv", "w") as file:
 		headers = ["Category", "Name", "Abstract"]
 		csv_writer = writer(file)
 		csv_writer.writerow(headers)

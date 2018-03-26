@@ -1,8 +1,8 @@
 import csv
 
 class Athlete:
-	def __init__(self, sport, name, abstract):
-		self.sport = sport
+	def __init__(self, category, name, abstract):
+		self.category = category
 		self.name = name
 		self.abstract = abstract				
 
@@ -10,6 +10,6 @@ class Athlete:
 		with open(file) as csvfile:
 			csv_reader = csv.DictReader(csvfile)
 			for row in csv_reader: 
-				self.sport = sport
+				self.category = category
 				self.name = row['name']
 				self.abstract = row['abstract']
