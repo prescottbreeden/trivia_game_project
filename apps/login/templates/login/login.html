@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
+	<title>Registration</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'login/login.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+	<div class="header">
+	<h1 class="landing_title">(ง'̀-'́)ง Ultimate Fan</h1>
+			<form action="{% url 'logout' %}" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Logout">
+			</form>
+	</div>
+	<div class="container">
+		<div class="box">
+			<div class="selectors"><a href="/">Home</a></div>
+			<div class="explain">Return to the home page</div>
+		</div>
+		<div class="box">
+			<div class="selectors"><a href="/quiz">Quizes</a></div>
+			<div class="explain">Test your knowledge and beat your friends!</div>
+		</div>
+		<div class="box">
+			<div class="selectors">Quiz Stats</div>
+			<div class="explain">Coming soon to an update near you!</div>
+		</div>
+		<div class="box">    
+			<div class="selectors">Your Stats</div>
+			<div class="explain">Or maybe account edit, I don't know</div>
+		</div>
+	</div>
+	<div class="content {{request.session.status}}">
+		<div class="registration_form">
+		<h4>Register</h4>
+		<table>
+		<form action="{% url 'register' %}" method="post">
+			{% csrf_token %}
+			<tr>
+				<td><label for="name">Name:</label></td>
+				<td><input type="text" placeholder="name" name="name"></td>
+			</tr>
+			<tr>
+				<td><label for="alias">Alias:</label></td>
+				<td><input type="text" placeholder="alias" name="alias"></td>
+			</tr>
+			<tr>
+				<td><label for="email">Email:</label></td>
+				<td><input type="text" placeholder="email"  name="email"></td>
+			</tr>
+			<tr>
+				<td><label for="password">Password:</label></td>
+				<td><input type="password" placeholder="password" name="password"></td>
+			</tr>
+			<tr>
+				<td><label for="cpassword">PW Confirm:</label></td>
+				<td><input type="password" placeholder="confirm password" name="cpassword"></td>
+			</tr>
+			<tr>
+				<td><label for="birthday">Birthday:</label></td>
+				<td><input type="date" placeholder="" name="birthday" required></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Register"></td>
+			</tr>
+		</form> 
+		</table>
+		</div>
+		<div class="registration_divider"></div>
+		<div class="login_form {{request.session.status}}">
+			<h4 class="(( session['status'] ))">Log in</h4>
+			<form action="{% url 'login' %}" method='POST'>
+			{% csrf_token %}
+			<table>
+				<tr>
+					<td><label for="email">Email:</label></td>
+					<td><input type="text" placeholder='email' name="email" value=""></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label for="password">Password:</label></td>
+					<td><input type="password" placeholder='password' name="password"></td>
+					<td><input type="submit" value="Login"></td></form>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="error_messages">
+		{% if messages %}
+			<ul>
+				{% for message in messages %}
+					<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+	{% if 'super_user_id' in request.session %}
+		<div class="welcome">
+			<h4 class='fade_in slide_up'> Welcome {{ super_user.alias }}! </h4>
+		</div>
+	{% endif %}
+	<footer>
+		<p>Copyright 2018 - All rights reserved - (ง'̀-'́)ง</p>
+	</footer>
+</body>
+</html>
