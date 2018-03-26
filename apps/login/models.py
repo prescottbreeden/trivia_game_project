@@ -19,9 +19,9 @@ class Super_User_Manager(models.Manager):
 		if postData['first_name'] == '':
 			result['errors']['first_name'] = 'First name cannot be blank'
 		if postData['last_name'] == '':
-			result['errors']['last_name'] = 'First name cannot be blank'
+			result['errors']['last_name'] = 'Last name cannot be blank'
 		if postData['alias'] == '':
-			result['errors']['alias'] = 'Last name cannot be blank'
+			result['errors']['alias'] = 'Alias cannot be blank'
 
 		# email field validation
 		if postData['email'] == '':
@@ -45,7 +45,8 @@ class Super_User_Manager(models.Manager):
 			user_password = postData['password'] 
 			hashed = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt())
 			new_super_user = Super_User.objects.create(
-				name = postData['name'],
+				first_name = postData['first_name'],
+				last_name = postData['last_name'],
 				alias = postData['alias'],
 				email = postData['email'],
 				password = hashed,

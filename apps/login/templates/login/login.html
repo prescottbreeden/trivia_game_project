@@ -24,12 +24,12 @@
 			<div class="explain">Test your knowledge and beat your friends!</div>
 		</div>
 		<div class="box">
-			<div class="selectors">Quiz Stats</div>
+			<div class="selectors"><a href="">Quiz Stats</a></div>
 			<div class="explain">Coming soon to an update near you!</div>
 		</div>
 		<div class="box">    
-			<div class="selectors">Your Stats</div>
-			<div class="explain">Or maybe account edit, I don't know</div>
+			<div class="selectors"><a href="/quiz">Your Account</a></div>
+			<div class="explain">Stuffs!</div>
 		</div>
 	</div>
 	<div class="content {{request.session.status}}">
@@ -39,8 +39,12 @@
 		<form action="{% url 'register' %}" method="post">
 			{% csrf_token %}
 			<tr>
-				<td><label for="name">Name:</label></td>
-				<td><input type="text" placeholder="name" name="name"></td>
+				<td><label for="first_name">First Name:</label></td>
+				<td><input type="text" placeholder="first name" name="first_name"></td>
+			</tr>
+			<tr>
+				<td><label for="last_name">Last Name:</label></td>
+				<td><input type="text" placeholder="last name" name="last_name"></td>
 			</tr>
 			<tr>
 				<td><label for="alias">Alias:</label></td>
@@ -57,10 +61,6 @@
 			<tr>
 				<td><label for="cpassword">PW Confirm:</label></td>
 				<td><input type="password" placeholder="confirm password" name="cpassword"></td>
-			</tr>
-			<tr>
-				<td><label for="birthday">Birthday:</label></td>
-				<td><input type="date" placeholder="" name="birthday" required></td>
 			</tr>
 			<tr>
 				<td></td>
