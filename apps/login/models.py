@@ -40,7 +40,7 @@ class User_Manager(models.Manager):
 		if len(result['errors']):
 			return result
 		else:
-		# create new super_user
+		# create new user
 			user_password = postData['password'] 
 			hashed = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt())
 			new_user = User.objects.create(
@@ -51,7 +51,7 @@ class User_Manager(models.Manager):
 				password = hashed,
 				)
 			result['status'] = True
-			result['user_id'] = user.id
+			result['user_id'] = new_user.id
 			return result
 
 	##### LOGIN VALIDATION #####

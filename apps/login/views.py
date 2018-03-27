@@ -6,33 +6,33 @@ from .models import User
 
 # landing page
 def index(request):
-	if 'super_user_id' not in request.session:
+	if 'user_id' not in request.session:
 		request.session['status'] = 'guest'
 		return render(request, 'login/login.html')
 	else:
 		request.session['status'] = 'logged_in'
-		return render(request, 'login/login.html', {'super_user': Super_User.objects.get(id=request.session['super_user_id'])})
+		return render(request, 'login/login.html', {'user': User.objects.get(id=request.session['user_id'])})
 
 # register new super_user
 def register(request):
-	result = Super_User.objects.validate_registration(request.POST)
+	result = User.objects.validate_registration(request.POST)
 	if result['status'] != True:
 		for error in result['errors']:
 			messages.error(request, result['errors'][error])
 		return redirect('/')
 	else:
-		request.session['super_user_id'] = result['super_user_id']
+		request.session['user_id'] = result['user_id']
 		return redirect('/')
 
 # log in existing super_user
 def login(request):
-	result = Super_User.objects.validate_login(request.POST)
+	result = User.objects.validate_login(request.POST)
 	if result['status'] != True:
 		for error in result['errors']:
 			messages.error(request, result['errors'][error])
 		return redirect('/')
 	else:
-		request.session['super_user_id'] = result['super_user_id']
+		request.session['user_id'] = result['user_id']
 		return redirect('/')
 
 # clear request.session data
