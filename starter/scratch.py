@@ -32,3 +32,17 @@
 	}
 }
 
+path('submit/<str:answer>', views.submit_quiz, name = 'submit_quiz'),
+
+def submit_quiz(request, answer):
+	
+	if answer == Question.answer:
+		score = 1
+	else:
+		score = 0
+	
+	Quiz.objects.create(
+		score = score,
+		user = User.objects.get(id=request.session['user_id']),
+		category = Category.objects.get(id = request.session['cat_id']),
+		)
