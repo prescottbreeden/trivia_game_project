@@ -14,7 +14,7 @@
 		</div>
 		<div class="container">
 			<div class="box">
-			<div class="selectors"><a href="/">Home</a></div>
+			<div class="selectors"><a href="{% url 'quiz_home' %}">Home</a></div>
 			<div class="explain">Return to the home page</div>
 		</div>
 		<div class="box">
@@ -26,13 +26,19 @@
 			<div class="explain">Coming soon to an update near you!</div>
 		</div>
 		<div class="box">    
-			<div class="selectors"><a href="/quiz">Your Account</a></div>
+			<div class="selectors"><a href="">Your Account</a></div>
 			<div class="explain">Stuffs!</div>
 		</div>
 		</div>
-		<div class="quiz">
-			Quiz question goes here...
+		<div class="select_quiz">
+			<h2>Select a category for quiz:</h2>
+			{% for category in categories %}
+			<form type="hidden" action="{% url 'create_quiz' category.id %}">
+			<button class="submit">{{ category.activity_type }}!</button>	
+			</form>
+			{% endfor %}
 		</div>
+
 	</div>
 </body>
 </html>

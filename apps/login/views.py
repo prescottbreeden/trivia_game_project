@@ -13,7 +13,7 @@ def index(request):
 		request.session['status'] = 'logged_in'
 		return render(request, 'login/login.html', {'user': User.objects.get(id=request.session['user_id'])})
 
-# register new super_user
+# register new user
 def register(request):
 	result = User.objects.validate_registration(request.POST)
 	if result['status'] != True:
@@ -24,7 +24,7 @@ def register(request):
 		request.session['user_id'] = result['user_id']
 		return redirect('/')
 
-# log in existing super_user
+# log in existing user
 def login(request):
 	result = User.objects.validate_login(request.POST)
 	if result['status'] != True:

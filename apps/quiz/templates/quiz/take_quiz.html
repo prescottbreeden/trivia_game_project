@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz O Matic!</title>
+</head>
+<body>
+	<div class="quiz">
+		<h3>{{ questions.trivia }}</h3>
+		{% for answers in questions.answer_list %}
+		<p>{{ answers.answer.athlete.name }} ({{ answers.value }})</p>
+		{% endfor %}
+	</div>
+</body>
+</html>
