@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quiz</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<h1 class="landing_title">(ง'̀-'́)ง Ultimate Fan</h1>
+			<form action="{% url 'logout' %}" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Logout">
+			</form>
+		</div>
+		<div class="container">
+			<div class="box">
+			<div class="selectors"><a href="/">Home</a></div>
+			<div class="explain">Return to the home page</div>
+		</div>
+		<div class="box">
+			<div class="selectors"><a href="/quiz">Quizes</a></div>
+			<div class="explain">Test your knowledge and beat your friends!</div>
+		</div>
+		<div class="box">
+			<div class="selectors"><a href="">Quiz Stats</a></div>
+			<div class="explain">Coming soon to an update near you!</div>
+		</div>
+		<div class="box">    
+			<div class="selectors"><a href="/quiz">Your Account</a></div>
+			<div class="explain">Stuffs!</div>
+		</div>
+		</div>
+		<div class="quiz">
+			Quiz question goes here...
+		</div>
+	</div>
+</body>
+</html>

@@ -2,11 +2,8 @@ from django.db import models
 from apps.login.models import User
 from random import *
 import csv
-# Create your models here.
 
-
-#************Quiz Table*************
-class QuizScoreManager(models.Manager):
+class Quiz_Score_Manager(models.Manager):
 	def make_quiz(self, postData):
 		quiz = []
 		question = {
@@ -45,20 +42,11 @@ class QuizScoreManager(models.Manager):
 		#Return the the list of all questions
 		return quiz
 
-class QuizScore (models.Model):
-	score = models.IntegerField()
-	user = models.ForeignKey(User, related_name = "testie")
-	catagory = models.ForeignKey(Category, related_name  = "quiz")
-	objects = QuizScoreManager()
-#***********END Quiz Table *********
-
-#************Category Table*************
 class Category (models.Model):
 	activity_type = models.CharField(max_length=255)
-	#objects = CatagoryManager()
-#***********END Category Table *********
+	# objects = Catagory_Manager()
 
-class QuizScore(models.Model):
+class Quiz_Score(models.Model):
 	score = models.IntegerField()
 	user = models.ForeignKey(
 		User, 
@@ -71,10 +59,8 @@ class QuizScore(models.Model):
 		on_delete=models.CASCADE, 
 		related_name  = "quiz_type"
 	)
-	# objects = QuizScoreManager()
-#***********END Quiz Table *********
+	objects = Quiz_Score_Manager()
 
-#************Athlete Table*************
 class People(models.Model):
 	name = models.CharField(max_length=255)
 	abstract = models.TextField(default = "")
@@ -83,5 +69,4 @@ class People(models.Model):
 		on_delete=models.CASCADE, 
 		related_name  = "category"
 	)
-	#objects = PeopleManager()
-#***********END Athlete Table *********
+	#objects = People_Manager()
