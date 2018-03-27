@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
 	<title>Quiz O Matic!</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'quiz/take_quiz.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
+	<div class="header">
+	<h1 class="landing_title">(ง'̀-'́)ง Ultimate Fan</h1>
+			<form action="{% url 'logout' %}" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Logout">
+			</form>
+	</div>
+	<div class="container">
+		<div class="box">
+			<div class="selectors"><a href="/">Home</a></div>
+			<div class="explain">Return to the home page</div>
+		</div>
+		<div class="box">
+			<div class="selectors"><a href="/quiz">Quizes</a></div>
+			<div class="explain">Test your knowledge!</div>
+		</div>
+		<div class="box">
+			<div class="selectors"><a href="">Quiz Stats</a></div>
+			<div class="explain">Coming soon!</div>
+		</div>
+		<div class="box">    
+			<div class="selectors"><a href="/quiz">Your Account</a></div>
+			<div class="explain">Stuffs!</div>
+		</div>
+	</div>
 	<div class="quiz">
 		<h3>{{ questions.trivia }}</h3>
-		{% for answers in questions.answer_list %}
-		<p>{{ answers.answer.athlete.name }} ({{ answers.value }})</p>
-		{% endfor %}
+		<div class="answers">
+			{% for answers in questions.answer_list %}
+			<p class='answer'>{{ answers.answer.athlete.name }}</p>
+			{% endfor %}
+		</div>
+		<br>
+		<div class="timer"></div>
 	</div>
+	<footer>
+		<p>Copyright 2018 - Come at me bro - (ง'̀-'́)ง</p>
+	</footer>
 </body>
 </html>

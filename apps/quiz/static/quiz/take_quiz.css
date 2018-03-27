@@ -80,43 +80,55 @@ footer {
 	margin: 0 10px;
 	margin-top: 15px;
 }
-.select_quiz {
+
+.quiz{
 	width: 70%;
 	margin: 0 auto;
-	text-align: center;
-}
-.categories {
-	margin: 10px auto;
-	/*border: 2px dashed black;*/
-	height: 130px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	/*align-content: center;*/
-	flex-wrap: wrap;
-	/*flex-basis: 30%;*/
-}
-.category {
-	padding: 10px;
+	/*border: 1px dashed black;*/
+	padding: 20px;
+	background-color: #EEEEEE;
+	color: black;
+	box-shadow: 2px 2px 2px black;
 	border-radius: 5px;
-	background-color: silver;
-	margin: 2px;
 }
-.category button {
-	background-color: inherit;
-	border: none;
-	cursor: pointer;
-	padding: 0;
-	text-transform: uppercase;
-	font-weight: bold;
+.answers{
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-around;
 }
-
-.category:hover {
-	background-color: orange;
+.answer {
+	display: inline;
+	padding: 10px;
+	/*border: 1px dashed black;*/
+	background-color: #DEDDDD;
+	color: black;
+	border-radius: 5px;
+	box-shadow: 0px 2px 0px #C9C9C9;
+}
+.answer:hover {
 	color: white;
+	background-color: green;
+	box-shadow: 0px 0px 0px black;
+	transform: translateY(2px);
 	transition-duration: .25s;
 }
-
-
-
-
+.timer {
+	height: 10px;
+	width: 100%;
+	background-color: green;
+	animation-name: timer;
+	animation-duration: 30s;
+	animation-fill-mode: forwards;
+	animation-timing-function: linear;
+	animation-delay: 0s
+}
+@keyframes timer {
+	0% {
+		width: 100%
+		background-color: green;
+	}
+	100% {
+		width: 0%;
+		background-color: red;
+	}
+}
