@@ -8,6 +8,7 @@
 
 {'questions': 
 	{
+	'category': 1
 	'trivia': 'Former American football star... "', 
 	'answer_list': 
 		[

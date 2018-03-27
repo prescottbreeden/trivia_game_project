@@ -12,9 +12,38 @@ def quiz(request):
 def create_quiz(request, id):
 	if 'user_id' not in request.session:
 		return redirect('/')
-	
-	context = {'questions' : Quiz.objects.make_quiz(id = id)}
+
+	request.session['cat_id'] = id
+	context = {
+		'user': User.objects.get(id=request.session['user_id']),
+		'questions': Quiz.objects.make_quiz(id=id)
+	}
 	return render(request, 'quiz/take_quiz.html', context)
 
+def submit_quiz(request, id):
+	if 'user_id' not in request.session:
+		return redirect('/')
+	if 'score' not in request.session:
+		request.session['score'] = 0
+	Quiz.objects.create(
+		score = id,
+		user = User.objects.get(id=request.session['user_id']),
+		category = Category.objects.get(id = request.session['cat_id']),
+		)
+	request.session['score'] += 1
+
+	if 'quiz_counter' not in request.session:
+		request.session['quiz_counter'] = 0
+	if request.session['quiz_counter'] < 5:
+		request.session['quiz_counter']+=1
+		return redirect('/quiz/' + str(request.session['cat_id']))
+	request.session['score'] = 0
+	request.session['quiz_counter'] = 0
+	return redirect('/quiz/end')
+
+
 def quiz_end(request):
-	pass
+	context = {
+		'user': User.objects.get(id=request.session['user_id']),
+	}
+	return render(request, 'quiz/quiz_end.html', context)

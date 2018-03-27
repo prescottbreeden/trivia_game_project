@@ -14,14 +14,16 @@ class Quiz_Manager(models.Manager):
 		random.shuffle(people_list)
 		answer = people_list.pop()
 		trivia = answer['athlete'].abstract
-		answer_list.append({'answer': answer,'value': True})
+		answer_list.append({'answer': answer,'value': 1})
 		for k in range(0,3):
 			answer = people_list.pop()
-			answer_list.append({'answer': answer,'value': False,})
+			answer_list.append({'answer': answer,'value': 0,})
 		random.shuffle(answer_list)
+		quiz['category'] = Category.objects.get(id=id)
 		quiz['trivia'] = trivia
 		quiz['answer_list'] = answer_list
 		return quiz #and magic
+
 
 class Category (models.Model):
 	activity_type = models.CharField(max_length=255)

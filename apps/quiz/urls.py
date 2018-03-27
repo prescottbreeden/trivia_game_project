@@ -7,5 +7,6 @@ from . import views
 urlpatterns = [
     path('', views.quiz, name = 'quiz_home'),
     path('<int:id>', views.create_quiz, name = 'create_quiz'),
+    path('submit/<int:id>', views.submit_quiz, name = 'submit_quiz'),
     path('end', views.quiz_end, name = 'quiz_end'),
     ]

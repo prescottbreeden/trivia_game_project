@@ -2,10 +2,9 @@
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
-	<title>Quiz</title>
+	<title>You are bad</title>
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'quiz/quiz.css' %}" media="screen" title="no title"  charset="utf-8">
-	<link rel="shortcut icon" type="image/png" href="{% static 'quiz/favcicon/favicon.png' %}"/>
+	<link rel="stylesheet" href="{% static 'quiz/quiz_end.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
 	<div class="wrapper">
@@ -34,18 +33,9 @@
 			<div class="explain">Your Stuffs!</div>
 		</div>
 		</div>
-		<div class="select_quiz">
-			<h2>Select a category for quiz:</h2>
-			<div class="categories">
-			{% for category in categories %}
-				<div class="category">
-					<form type="hidden" action="{% url 'create_quiz' category.id %}">
-					<button type="submit" class='cat_btn'>{{ category.activity_type }}!</button>	
-					</form>
-				</div>
-			{% endfor %}
-			</div>
-		</div>
+		You did it, {{ user.alias }}! 
+
+		Wow you are terrible at sports trivia!
 	</div>
 </body>
 </html>

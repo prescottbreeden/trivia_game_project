@@ -36,7 +36,12 @@
 		<h3>{{ questions.trivia }}</h3>
 		<div class="answers">
 			{% for answers in questions.answer_list %}
-			<p class='answer'>{{ answers.answer.athlete.name }}</p>
+			<form action="{% url 'submit_quiz' answers.value %}" method="POST">
+			{% csrf_token %}
+			<p class='answer'> 
+			<button type="submit">
+			{{ answers.answer.athlete.name }}
+			</button></p></form>
 			{% endfor %}
 		</div>
 		<br>
