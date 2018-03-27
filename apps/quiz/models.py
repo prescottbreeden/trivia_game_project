@@ -14,12 +14,12 @@ class Quiz_Manager(models.Manager):
 		random.shuffle(people_list)
 		answer = people_list.pop()
 		trivia = answer['athlete'].abstract
-		quiz['trivia'] = trivia
 		answer_list.append({'answer': answer,'value': True})
 		for k in range(0,3):
 			answer = people_list.pop()
 			answer_list.append({'answer': answer,'value': False,})
 		random.shuffle(answer_list)
+		quiz['trivia'] = trivia
 		quiz['answer_list'] = answer_list
 		return quiz #and magic
 
