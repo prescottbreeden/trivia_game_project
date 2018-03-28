@@ -14,10 +14,16 @@ def create_quiz(request, id):
 		return redirect('/')
 
 	request.session['cat_id'] = id
+	if 'dont_repeat' not in request.session:
+		request.session['dont_repeat'] = []
+
+	trivia = Quiz.objects.make_quiz(id=id, dont_repeat = request.session['dont_repeat'])
 	context = {
 		'user': User.objects.get(id=request.session['user_id']),
-		'questions': Quiz.objects.make_quiz(id=id)
+		'questions': trivia['quiz']
 	}
+	request.session['dont_repeat'] = trivia['dont_repeat']
+	print(request.session['dont_repeat'])
 	return render(request, 'quiz/take_quiz.html', context)
 
 def submit_quiz(request, id):
@@ -46,4 +52,5 @@ def quiz_end(request):
 	context = {
 		'user': User.objects.get(id=request.session['user_id']),
 	}
+	request.session['dont_repeat'] = []
 	return render(request, 'quiz/quiz_end.html', context)

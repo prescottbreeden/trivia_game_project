@@ -3,16 +3,24 @@ from apps.login.models import User
 from random import choice
 import csv, random
 
+
+
 class Quiz_Manager(models.Manager):
-	def make_quiz(self, id):
+	def make_quiz(self, id, dont_repeat):
+		all_crap = {}
 		quiz = {}
+		f_list = dont_repeat
 		answer_list = []
 		people_list = []
 		people_dict = {'people' : People.objects.filter(category = Category.objects.get(id = id))}
 		for person in people_dict['people']:
 			people_list.append({'athlete': person})
 		random.shuffle(people_list)
-		answer = people_list.pop()
+		for i in range(0,len(people_list)):
+			if people_list[i]['athlete'].name not in f_list:
+				answer = people_list.pop(i)
+				break
+		f_list.append(answer['athlete'].name)
 		trivia = answer['athlete'].abstract
 		answer_list.append({'answer': answer,'value': 1})
 		for k in range(0,3):
@@ -22,8 +30,11 @@ class Quiz_Manager(models.Manager):
 		quiz['category'] = Category.objects.get(id=id)
 		quiz['trivia'] = trivia
 		quiz['answer_list'] = answer_list
-		return quiz #and magic
-
+		all_crap = {
+			'quiz': quiz,
+			'dont_repeat': f_list
+		}
+		return all_crap #and magic
 
 class Category (models.Model):
 	activity_type = models.CharField(max_length=255)
