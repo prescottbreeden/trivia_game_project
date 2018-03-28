@@ -2,8 +2,21 @@ from django.db import models
 from apps.login.models import User
 from random import choice
 import csv, random
+import json
+from django.http import HttpResponse
 
 class Quiz_Manager(models.Manager):
+	def make_chart(self, look_At):
+		chart_data = {
+			'labels': ["Correct", "Incorrect"],
+			'datasets': [{
+				'label': "All Data",
+				'backgroundColor': ['rgb(132,255,99)','rgb(255, 99, 132)'],
+				'borderColor': 'rgb(0, 0, 0)',
+				'data': [ len(Quiz.objects.filter(score=1, user = User.objects.get(id=look_At) ) ), len( Quiz.objects.filter(score=0, user = User.objects.get(id=look_At) ) ) ],
+			}]
+		},
+		return HttpResponse(json.dumps(chart_data), content_type="application/json")
 	def make_quiz(self, id, dont_repeat):
 		all_crap = {}
 		quiz = {}

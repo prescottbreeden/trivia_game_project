@@ -54,3 +54,11 @@ def quiz_end(request):
 	}
 	request.session['dont_repeat'] = []
 	return render(request, 'quiz/quiz_end.html', context)
+
+def quiz_stats(request):
+	
+	return render(request, 'quiz/quiz_chart_test.html')
+
+def make_chart (request):
+
+	return Quiz.objects.make_chart(request.session['user_id'])
