@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-import re, bcrypt
+import re
+#bcrypt
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -42,13 +43,13 @@ class User_Manager(models.Manager):
 		else:
 		# create new user
 			user_password = postData['password'] 
-			hashed = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt())
+			#hashed = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt())
 			new_user = User.objects.create(
 				first_name = postData['first_name'],
 				last_name = postData['last_name'],
 				alias = postData['alias'],
 				email = postData['email'],
-				password = hashed,
+				password = postData['password']
 				)
 			result['status'] = True
 			result['user_id'] = new_user.id
@@ -56,29 +57,30 @@ class User_Manager(models.Manager):
 
 	##### LOGIN VALIDATION #####
 	def validate_login(self, postData):
-		result = {
-			'status' : False,
-			'errors' : {}
-		}
+		# result = {
+		# 	'status' : False,
+		# 	'errors' : {}
+		# }
 
-		# email validation
-		existing = User.objects.filter(email = postData['email'])
-		if existing:
-			user_password = postData['password'].encode()
-			# this is magic....
-			existing_password = existing[0].password[2: len(existing[0].password) - 1]
-			existing_password = existing_password.encode()
-			if not bcrypt.checkpw(user_password, existing_password):
-				result['errors']['password'] = 'Password doesn\'t match'
-		else:
-			result['errors']['password'] = 'Email not found'
+		# # email validation
+		# existing = User.objects.filter(email = postData['email'])
+		# if existing:
+		# 	user_password = postData['password'].encode()
+		# 	# this is magic....
+		# 	existing_password = existing[0].password[2: len(existing[0].password) - 1]
+		# 	existing_password = existing_password.encode()
+		# 	if not bcrypt.checkpw(user_password, existing_password):
+		# 		result['errors']['password'] = 'Password doesn\'t match'
+		# else:
+		# 	result['errors']['password'] = 'Email not found'
 
-		if len(result['errors']):
-			return result
-		else:
-			result['status'] = True
-			result['user_id'] = existing[0].id
-			return result
+		# if len(result['errors']):
+		# 	return result
+		# else:
+		# 	result['status'] = True
+		# 	result['user_id'] = existing[0].id
+		# 	return result
+		return True
 
 # define super_user
 class User(models.Model):

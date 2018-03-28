@@ -47,3 +47,11 @@ def quiz_end(request):
 		'user': User.objects.get(id=request.session['user_id']),
 	}
 	return render(request, 'quiz/quiz_end.html', context)
+
+def quiz_stats(request):
+	
+	return render(request, 'quiz/quiz_chart_test.html')
+
+def make_chart (request):
+
+	return Quiz.objects.make_chart(request.session['user_id'])
