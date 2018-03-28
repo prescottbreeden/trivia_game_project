@@ -3,8 +3,6 @@ from apps.login.models import User
 from random import choice
 import csv, random
 
-
-
 class Quiz_Manager(models.Manager):
 	def make_quiz(self, id, dont_repeat):
 		all_crap = {}
