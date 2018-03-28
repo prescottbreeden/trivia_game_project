@@ -33,7 +33,7 @@ def submit_quiz(request, id):
 		user = User.objects.get(id=request.session['user_id']),
 		category = Category.objects.get(id = request.session['cat_id']),
 		)
-	request.session['score'] += 1
+	request.session['score'] += id
 
 	if 'quiz_counter' not in request.session:
 		request.session['quiz_counter'] = 0

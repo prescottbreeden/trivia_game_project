@@ -40,7 +40,7 @@
 			{% for category in categories %}
 				<div class="category">
 					<form type="hidden" action="{% url 'create_quiz' category.id %}">
-					<button type="submit" class='cat_btn'>{{ category.activity_type }}!</button>	
+					<button type="submit" class='cat_btn'>{{ category.activity_type }}</button>	
 					</form>
 				</div>
 			{% endfor %}

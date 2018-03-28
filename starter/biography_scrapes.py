@@ -32,6 +32,7 @@ for page in all_urls:
 		person_soup = BeautifulSoup(person_res.text, 'html.parser')
 		person_name = person_soup.find('dd').get_text()
 		person_abstract = person_soup.find(class_='l-person--abstract').get_text()
+		person_abstract = person_abstract.replace(person_name, '######')
 		category = url.split('/')[-1:][0]
 		if category == 'football-players':
 			category = 1
@@ -56,7 +57,7 @@ for page in all_urls:
 			'name': person_name,
 			'abstract': person_abstract
 			})
-		sleep(3)
+		sleep(2)
 	with open("athletes.csv", "w") as file:
 		headers = ["Category", "Name", "Abstract"]
 		csv_writer = writer(file)

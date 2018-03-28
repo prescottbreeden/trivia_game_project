@@ -96,7 +96,7 @@ footer {
 	display: flex;
 	justify-content: space-around;
 }
-.answer {
+button {
 	display: inline;
 	padding: 10px;
 	/*border: 1px dashed black;*/
@@ -105,7 +105,8 @@ footer {
 	border-radius: 5px;
 	box-shadow: 0px 2px 0px #C9C9C9;
 }
-.answer:hover {
+
+button:hover {
 	color: white;
 	background-color: green;
 	box-shadow: 0px 0px 0px black;

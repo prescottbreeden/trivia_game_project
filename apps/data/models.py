@@ -3,7 +3,7 @@ from apps.quiz.models import *
 import csv
 # Create your models here.
 
-# categories = ['football', 'soccer', 'baseball', 'basketball', 'hockey', 'boxing', 'golf', 'martial_arts', 'tennis']
+# categories = ['football', 'soccer', 'baseball', 'basketball', 'hockey', 'boxing', 'golf', 'martial arts', 'tennis']
 # for sport in categories:
 # 	Category.objects.create(
 # 		activity_type = sport,
