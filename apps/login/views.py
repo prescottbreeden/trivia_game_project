@@ -39,3 +39,6 @@ def login(request):
 def logout(request):
 	request.session.flush()
 	return redirect('/')
+
+def account_info(request):
+	return render(request, 'login/user_account.html')

@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from time import sleep
 from apps.quiz.models import *
 from apps.login.models import *
 
@@ -9,6 +10,7 @@ def quiz(request):
 	return render(request, 'quiz/quiz.html', context)
 
 def create_quiz(request, id):
+	# request.session['answer_value'] = ''
 	if 'user_id' not in request.session:
 		return redirect('/')
 	request.session['cat_id'] = id
@@ -26,15 +28,17 @@ def create_quiz(request, id):
 def submit_quiz(request, id):
 	if 'user_id' not in request.session:
 		return redirect('/')
-	if 'score' not in request.session:
-		request.session['score'] = 0
 	Quiz.objects.create(
 		score = id,
 		user = User.objects.get(id=request.session['user_id']),
 		category = Category.objects.get(id = request.session['cat_id']),
 		)
+	if 'score' not in request.session:
+		request.session['score'] = 0
 	request.session['score'] += id
+	pass
 
+def next_quiz(request):
 	if 'quiz_counter' not in request.session:
 		request.session['quiz_counter'] = 0
 	if request.session['quiz_counter'] < 5:

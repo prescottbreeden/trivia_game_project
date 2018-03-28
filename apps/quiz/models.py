@@ -14,6 +14,7 @@ class Quiz_Manager(models.Manager):
 		for person in people_dict['people']:
 			people_list.append({'athlete': person})
 		random.shuffle(people_list)
+		#refreshing the page repeatedly will bug this code out...
 		for i in range(0,len(people_list)):
 			if people_list[i]['athlete'].name not in f_list:
 				answer = people_list.pop(i)

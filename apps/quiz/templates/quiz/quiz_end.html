@@ -4,6 +4,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
 	<title>You are bad</title>
 	{% load static %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type='text/javascript' src="{% static 'quiz/quiz_end.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'quiz/quiz_end.css' %}" media="screen" title="no title"  charset="utf-8">
 </head>
 <body>
@@ -33,9 +35,8 @@
 			<div class="explain">Your Stuffs!</div>
 		</div>
 		</div>
-		You did it, {{ user.alias }}! 
-
-		Wow you are terrible at sports trivia!
+		<h2>You did it, {{ user.alias }}!</h2>
+		<h3>Wow you are terrible at sports trivia!</h3>
 	</div>
 	<footer>
 		<p>Copyright 2018 - Come at me bro - (ง'̀-'́)ง</p>
