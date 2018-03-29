@@ -11,10 +11,13 @@
 <body>
 	<div class="header">
 		<h1 class="landing_title">(ง'̀-'́)ง Ultimate Fan</h1>
-		<form action="{% url 'logout' %}" method="POST">
-		{% csrf_token %}
-		<input type="submit" value="Log Out">
-		</form>
+		<div class="login_logout">
+			<p>User: {{ user.alias }}</p>
+			<form action="{% url 'logout' %}" method="POST">
+			{% csrf_token %}
+			<input type="submit" value="Log Out">
+			</form>
+		</div>
 	</div>
 	<div class="container">
 		<div class="box">
@@ -22,15 +25,15 @@
 			<div class="explain">Return to the home page</div>
 		</div>
 		<div class="box">
-			<div class="selectors"><a href="/quiz">Quizes</a></div>
+			<div class="selectors"><a href="/quiz">Quizzes</a></div>
 			<div class="explain">Test your knowledge!</div>
 		</div>
 		<div class="box">
-			<div class="selectors"><a href="">Quiz Stats</a></div>
-			<div class="explain">Coming soon!</div>
+			<div class="selectors"><a href="{% url 'quiz_stats' %}">Quiz Stats</a></div>
+			<div class="explain">How boss are you?</div>
 		</div>
-		<div class="box">    
-			<div class="selectors"><a href="/quiz">Your Account</a></div>
+		<div class="box">
+			<div class="selectors"><a href="{% url 'account_info' %}">Your Account</a></div>
 			<div class="explain">Your Stuffs!</div>
 		</div>
 	</div>

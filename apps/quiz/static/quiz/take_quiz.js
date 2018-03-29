@@ -4,14 +4,16 @@ $(document).ready(function(){
 
 $('button').on('click', function(){
     if ($(this).val() == '1'){
-        $('.answer').html(
+        $('.response_answer').html(
             '<h1 class="correct">CORRECT!!</h1>'
             )
     }
     else {
-        $('.answer').html(
+        $('.response_answer').html(
             '<h1 class="incorrect">Incorrect...</h1>'
             )
     }
+
+    console.log('next question').delay(1000)
 })
 })

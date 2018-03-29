@@ -41,4 +41,6 @@ def logout(request):
 	return redirect('/')
 
 def account_info(request):
+	if 'user_id' not in request.session:
+		return redirect('/')
 	return render(request, 'login/user_account.html')
